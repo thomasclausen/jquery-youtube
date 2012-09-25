@@ -29,7 +29,7 @@
 			}
 			var link_title = $(this).find('a').text();
 			
-			var videoDATA = 'http://gdata.youtube.com/feeds/api/videos/' + video_id + '?v=2&alt=jsonc';
+			var videoDATA = 'http://gdata.youtube.com/feeds/api/videos/' + video_id + '?v=2&alt=jsonc&callback=?';
 
 			$.getJSON(videoDATA, function(video) {
 				$.each(video, function() {
