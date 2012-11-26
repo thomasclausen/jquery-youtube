@@ -8,7 +8,7 @@
 			show_caption: true, // true | false
 			show_title: true, // true | false
 			show_description: true, // true | false
-			description_length: 0, // Any amount you like. Above 0 shortens the description length
+			description_length: 0 // Any amount you like. Above 0 shortens the description length
 		}, options);
 	
 		var e = $(this);
