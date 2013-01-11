@@ -70,8 +70,6 @@
 			var title = $('.title', this).text();
 			var description = $('.description', this).text();
 
-			var share_url = $(this).parent().siblings('.fakta').attr('data-permalink');
-
 			$('iframe', youtube_cinema).attr('src', 'http://www.youtube.com/embed/' + video_id + '?wmode=transparent');
 			$('.youtube_cinema_caption', youtube_cinema).html('<p class="title">' + title + '</p><p class="description">' + modText(description) + '</p>');
 
