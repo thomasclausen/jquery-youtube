@@ -18,8 +18,8 @@
 
 		var youtube_cinema = $('#youtube_cinema');
 
-		e.children('li').each(function(v) {
-			var link_url = $(this).find('a').attr('href');
+		$('li', e).each(function(v) {
+			var link_url = $('a', this).attr('href');
 			if (link_url.indexOf('youtu.be') > 0) {
 				var split_link_url = link_url.split('/');
 				var video_id = split_link_url[3];
@@ -27,7 +27,7 @@
 				var split_link_url = link_url.split('=');
 				var video_id = split_link_url[1];
 			}
-			var link_title = $(this).find('a').text();
+			var link_title = $('a', this).text();
 			
 			var videoDATA = 'http://gdata.youtube.com/feeds/api/videos/' + video_id + '?v=2&alt=jsonc&callback=?';
 
@@ -36,27 +36,27 @@
 					var output = '';
 
 					if (video.data.aspectRatio == 'widescreen') {
-						e.children('li').eq(v).attr('data-aspect-ratio', video.data.aspectRatio);
+						$('li', e).eq(v).attr('data-aspect-ratio', video.data.aspectRatio);
 					}
 					if (options.use_link_title == true) {
 						output += '<div class="title">' + video.data.title + '</div>';
 					} else {
 						output += '<div class="title">' + link_title + '</div>';
 					}
-					output += '<div class="image"><img src="http://i.ytimg.com/vi/' + split_link_url[3] + '/mqdefault.jpg" /></div>';
+					output += '<div class="image"><img src="http://i.ytimg.com/vi/' + video_id + '/mqdefault.jpg" /></div>';
 					if (options.description_length != 0 && video.data.description.length > options.description_length) {
 						output += '<div class="description">' + video.data.description.substring(0, options.description_length) + '...</div>';
 					} else {
 						output += '<div class="description">' + video.data.description + '</div>';
 					}
 
-					e.children('li').eq(v).find('a').html(output);
+					$('li', e).eq(v).find('a').html(output);
 				});
 			});
 		});
 
-		e.children('li').find('a').click(function(e) {
-			if (youtube_cinema.children('.youtube_cinema_box').is(':animated') || youtube_cinema.children('.youtube_cinema_overlay').is(':animated')) { return false; }
+		$('li a', e).click(function(e) {
+			if ($('.youtube_cinema_box', youtube_cinema).is(':animated') || $('.youtube_cinema_overlay', youtube_cinema).is(':animated')) { return false; }
 
 			var video_url = $(this).attr('href');
 			if (video_url.indexOf('youtu.be') > 0) {
@@ -67,44 +67,46 @@
 				var video_id = split_video_url[1];
 			}
 			var widescreen = $(this).parent().attr('data-aspect-ratio');
-			var title = $(this).find('.title').text();
-			var description = $(this).find('.description').text();
+			var title = $('.title', this).text();
+			var description = $('.description', this).text();
 
 			var share_url = $(this).parent().siblings('.fakta').attr('data-permalink');
 
-			youtube_cinema.find('iframe').attr('src', 'http://www.youtube.com/embed/' + video_id + '?wmode=transparent');
-			youtube_cinema.find('.youtube_cinema_caption').html('<p class="title">' + title + '</p><p class="description">' + modText(description) + '</p>');
+			$('iframe', youtube_cinema).attr('src', 'http://www.youtube.com/embed/' + video_id + '?wmode=transparent');
+			$('.youtube_cinema_caption', youtube_cinema).html('<p class="title">' + title + '</p><p class="description">' + modText(description) + '</p>');
 
 			if (options.show_title == false) {
-				youtube_cinema.find('.youtube_cinema_box .title').css({'display': 'none'});
+				$('.youtube_cinema_box .title', youtube_cinema).css({'display': 'none'});
 			}
 			if (options.show_description == false) {
-				youtube_cinema.find('.youtube_cinema_box .description').css({'display': 'none'});
+				$('.youtube_cinema_box .description', youtube_cinema).css({'display': 'none'});
 			}
 			if (widescreen == 'widescreen') {
-				youtube_cinema.find('.youtube_cinema_box').css({'height': 360}).find('iframe').css({'height': 360});
+				$('.youtube_cinema_box', youtube_cinema).css({'height': 360}).find('iframe').css({'height': 360});
 			} else {
-				youtube_cinema.find('.youtube_cinema_box').css({'height': 480}).find('iframe').css({'height': 480});
+				$('.youtube_cinema_box', youtube_cinema).css({'height': 480}).find('iframe').css({'height': 480});
 			}
 
 			if (options.effect == 'none') {
-				youtube_cinema.find('.youtube_cinema_overlay').show();
-				youtube_cinema.find('.youtube_cinema_box').show();
+				$('.youtube_cinema_overlay', youtube_cinema).show();
+				$('.youtube_cinema_box', youtube_cinema).show();
 				if (options.show_caption == true) {
-					youtube_cinema.find('.youtube_cinema_caption').show();
+					$('.youtube_cinema_caption', youtube_cinema).show();
 				}
 			} else { 
-				youtube_cinema.find('.youtube_cinema_overlay').fadeIn((options.speed/2), function() {
+				$('.youtube_cinema_overlay', youtube_cinema).fadeIn((options.speed/2), function() {
 					if (options.effect == 'fade') {
-						youtube_cinema.find('.youtube_cinema_box').fadeIn(options.speed, function() {
+						$('.youtube_cinema_box', youtube_cinema).fadeIn(options.speed, function() {
 							if (options.show_caption == true) {
-								youtube_cinema.find('.youtube_cinema_caption').delay(options.timeout).fadeIn(options.speed);
+								$('.youtube_cinema_caption', youtube_cinema).delay(options.timeout).fadeIn(options.speed);
 							}
 						});
 					} else {
-						youtube_cinema.find('.youtube_cinema_box').css({'top': -youtube_cinema.find('.youtube_cinema_box').outerHeight()}).show().animate({'top': 100}, options.speed, function() {
+						$('.youtube_cinema_box', youtube_cinema).css({'top': -$('.youtube_cinema_box', youtube_cinema).outerHeight()}).show().animate({'top': 100}, options.speed, function() {
 							if (options.show_caption == true) {
-								youtube_cinema.find('.youtube_cinema_caption').delay(options.timeout).slideDown(options.speed);
+								$('.youtube_cinema_caption', youtube_cinema).delay(options.timeout).slideDown(options.speed, function() {
+									$(this).css('overflow', 'visible');
+								});
 							}
 						});
 					}
@@ -114,24 +116,24 @@
 			e.preventDefault();
 		});
 
-		youtube_cinema.find('.youtube_cinema_overlay, #youtube_cinema_close').click(function(e) {
-			if (youtube_cinema.children('.youtube_cinema_box').is(':animated') || youtube_cinema.children('.youtube_cinema_overlay').is(':animated')) { return false; }
+		$('.youtube_cinema_overlay, #youtube_cinema_close', youtube_cinema).click(function(e) {
+			if ($('.youtube_cinema_box', youtube_cinema).is(':animated') || $('.youtube_cinema_overlay', youtube_cinema).is(':animated')) { return false; }
 			if (options.effect == 'none') {
-				youtube_cinema.find('.youtube_cinema_overlay').hide();
-				youtube_cinema.find('.youtube_cinema_box').hide();
-				youtube_cinema.find('.youtube_cinema_caption').hide();
-				youtube_cinema.find('iframe').attr('src', '');
+				$('.youtube_cinema_overlay', youtube_cinema).hide();
+				$('.youtube_cinema_box', youtube_cinema).hide();
+				$('.youtube_cinema_caption', youtube_cinema).hide();
+				$('iframe', youtube_cinema).attr('src', '');
 			} else if (options.effect == 'fade') {
-				youtube_cinema.find('.youtube_cinema_box').fadeOut((options.speed/2), function() {
-					youtube_cinema.find('.youtube_cinema_overlay').fadeOut(options.speed/2);
-					youtube_cinema.find('.youtube_cinema_caption').hide();
-					youtube_cinema.find('iframe').attr('src', '');
+				$('.youtube_cinema_box', youtube_cinema).fadeOut((options.speed/2), function() {
+					$('.youtube_cinema_overlay', youtube_cinema).fadeOut(options.speed/2);
+					$('.youtube_cinema_caption', youtube_cinema).hide();
+					$('iframe', youtube_cinema).attr('src', '');
 				});
 			} else {
-				youtube_cinema.find('.youtube_cinema_box').fadeOut((options.speed/2), function() {
-					youtube_cinema.find('.youtube_cinema_overlay').fadeOut(options.speed/2);
-					youtube_cinema.find('.youtube_cinema_caption').hide();
-					youtube_cinema.find('iframe').attr('src', '');
+				$('.youtube_cinema_box', youtube_cinema).fadeOut((options.speed/2), function() {
+					$('.youtube_cinema_overlay', youtube_cinema).fadeOut(options.speed/2);
+					$('.youtube_cinema_caption', youtube_cinema).hide();
+					$('iframe', youtube_cinema).attr('src', '');
 				});
 			}
 			e.preventDefault();
