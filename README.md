@@ -1,14 +1,12 @@
-# Description
+# YouTube Videos
 
 jQuery plugin that lets you show YouTube videos.
 
-# Examples
+### Examples
 
 The plugin can be seen live here: [http://beta.thomasclausen.dk/youtube/](http://beta.thomasclausen.dk/youtube/)
 
-# Usage
-
-Download it, upload it and activate it!
+### Usage
 
 Insert the following code to activate the pluign:
 
@@ -37,12 +35,12 @@ options:
     show_description: true - choices: 'true' or 'false'
     description_length: 0 - the length of the message
 
-# Feedback
+### Feedback
 
 I'm self-taught by scattering code across the web, so if you see some bad practices PLEASE contact me, so I can learn from the mistakes I'm making!
 
 Also feel free to contact me if you have som great ideas for improvements.
 
-# License
+### License
 
 Credits would be nice, but feel free to use as often as you like.
