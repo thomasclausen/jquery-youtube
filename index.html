@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+<title>YouTube</title>
+<meta charset="UTF-8" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="reset-html5.css" />
+<link rel="stylesheet" type="text/css" href="style.css" />
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">google.load("jquery", "1");</script>
+<script src="youtube_cinema.plugin.js"></script>
+<script src="youtube_video.plugin.js"></script>
+<script type="text/javascript">
+(function($) {
+	$(document).ready(function(){
+		$('html').removeClass('no-js');
+		if ($.browser.safari || $.browser.webkit) {
+			$('body').addClass('webkit');
+		}
+
+		$('#youtube_list_1').youtube_cinema();
+		$('#youtube_list_2').youtube_video();
+	});
+})(jQuery);
+</script>
+</head>
+
+<body>
+<div id="wrap">
+	<h2>YouTube</h2>
+	<ul id="youtube_list_1" class="youtube_list clearfix">
+		<li><a href="http://www.youtube.com/watch?v=Xw2bTpyHGCE">Learn English with Ricky Gervais - Pilot Episode</a></li>
+		<li><a href="http://youtu.be/7swLLh0apy0">Daly Feherty</a></li>
+		<li><a href="http://youtu.be/PKjaOQC9sS0">Thy til lands, til vands og i luften 2012</a></li>
+	</ul>
+	<ul id="youtube_list_2" class="youtube_list clearfix">
+		<li><a href="http://youtu.be/hX1YVzdnpEc">Barack Obama Singing Call Me Maybe by Carly Rae Jepsen</a></li>
+		<li><a href="http://youtu.be/YPIA7mpm1wU">Call Me Maybe - 2012 USA Olympic Swimming Team</a></li>
+		<li><a href="http://youtu.be/dE8SmGwmVlI">Bo Bech's chokoladekage</a></li>
+	</ul>
+</div>
+</body>
+
+</html>
