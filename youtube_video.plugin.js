@@ -1,7 +1,7 @@
 (function($) {
 	$.fn.youtube_video = function(options) {
 		options = $.extend({
-			use_link_title: false, // true | false
+			use_video_title: false, // true | false
 			timeout: 400,
 			speed: 400,
 			effect: 'slide', // slide | fade | none
@@ -38,10 +38,10 @@
 					if (video.data.aspectRatio == 'widescreen') {
 						$('li', e).eq(v).attr('data-aspect-ratio', video.data.aspectRatio);
 					}
-					if (options.use_link_title == true) {
-						output += '<div class="title">' + video.data.title + '</div>';
+					if (options.use_video_title == true) {
+						output += '<div class="title" data-video-title="' + escape(video.data.title) + '">' + video.data.title + '</div>';
 					} else {
-						output += '<div class="title">' + link_title + '</div>';
+						output += '<div class="title" data-video-title="' + escape(video.data.title) + '">' + link_title + '</div>';
 					}
 					output += '<div class="image"><img src="http://i.ytimg.com/vi/' + video_id + '/mqdefault.jpg" /></div>';
 					if (options.description_length != 0 && video.data.description.length > options.description_length) {
@@ -67,7 +67,7 @@
 				var video_id = split_video_url[1];
 			}
 			var widescreen = $(this).parent().attr('data-aspect-ratio');
-			var title = $('.title', this).text();
+			var title = unescape($('.title', this).attr('data-video-title'));
 			var description = $('.description', this).text();
 
 			$('iframe', youtube_video).attr('src', 'http://www.youtube.com/embed/' + video_id + '?wmode=transparent');
