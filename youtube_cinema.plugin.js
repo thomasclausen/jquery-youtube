@@ -100,7 +100,7 @@
 							}
 						});
 					} else {
-						$('.youtube_cinema_box', youtube_cinema).css({'top': -$('.youtube_cinema_box', youtube_cinema).outerHeight()}).show().animate({'top': 100}, options.speed, function() {
+						$('.youtube_cinema_box', youtube_cinema).css({'top': -$('.youtube_cinema_box', youtube_cinema).outerHeight()}).show().animate({'top': $(document).scrollTop() + 100}, options.speed, function() {
 							if (options.show_caption == true) {
 								$('.youtube_cinema_caption', youtube_cinema).delay(options.timeout).slideDown(options.speed, function() {
 									$(this).css('overflow', 'visible');
