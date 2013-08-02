@@ -35,10 +35,10 @@
 				$.each(video, function() {
 					var output = '';
 
-					if (video.data.aspectRatio == 'widescreen') {
+					if (video.data.aspectRatio === 'widescreen') {
 						$('li', e).eq(v).attr('data-aspect-ratio', video.data.aspectRatio);
 					}
-					if (options.use_video_title == true) {
+					if (options.use_video_title === true) {
 						output += '<div class="title" data-video-title="' + escape(video.data.title) + '">' + video.data.title + '</div>';
 					} else {
 						output += '<div class="title" data-video-title="' + escape(video.data.title) + '">' + link_title + '</div>';
@@ -73,35 +73,35 @@
 			$('iframe', youtube_cinema).attr('src', 'http://www.youtube.com/embed/' + video_id + '?wmode=transparent');
 			$('.youtube_cinema_caption', youtube_cinema).html('<p class="title">' + title + '</p><p class="description">' + modText(description) + '</p>');
 
-			if (options.show_title == false) {
+			if (options.show_title === false) {
 				$('.youtube_cinema_box .title', youtube_cinema).css({'display': 'none'});
 			}
-			if (options.show_description == false) {
+			if (options.show_description === false) {
 				$('.youtube_cinema_box .description', youtube_cinema).css({'display': 'none'});
 			}
-			if (widescreen == 'widescreen') {
+			if (widescreen === 'widescreen') {
 				$('.youtube_cinema_box', youtube_cinema).css({'height': 360}).find('iframe').css({'height': 360});
 			} else {
 				$('.youtube_cinema_box', youtube_cinema).css({'height': 480}).find('iframe').css({'height': 480});
 			}
 
-			if (options.effect == 'none') {
+			if (options.effect === 'none') {
 				$('.youtube_cinema_overlay', youtube_cinema).show();
 				$('.youtube_cinema_box', youtube_cinema).show();
-				if (options.show_caption == true) {
+				if (options.show_caption === true) {
 					$('.youtube_cinema_caption', youtube_cinema).show();
 				}
 			} else { 
 				$('.youtube_cinema_overlay', youtube_cinema).fadeIn((options.speed/2), function() {
-					if (options.effect == 'fade') {
+					if (options.effect === 'fade') {
 						$('.youtube_cinema_box', youtube_cinema).fadeIn(options.speed, function() {
-							if (options.show_caption == true) {
+							if (options.show_caption === true) {
 								$('.youtube_cinema_caption', youtube_cinema).delay(options.timeout).fadeIn(options.speed);
 							}
 						});
 					} else {
 						$('.youtube_cinema_box', youtube_cinema).css({'top': -$('.youtube_cinema_box', youtube_cinema).outerHeight()}).show().animate({'top': $(document).scrollTop() + 100}, options.speed, function() {
-							if (options.show_caption == true) {
+							if (options.show_caption === true) {
 								$('.youtube_cinema_caption', youtube_cinema).delay(options.timeout).slideDown(options.speed, function() {
 									$(this).css('overflow', 'visible');
 								});
@@ -116,12 +116,12 @@
 
 		$('.youtube_cinema_overlay, #youtube_cinema_close', youtube_cinema).click(function(e) {
 			if ($('.youtube_cinema_box', youtube_cinema).is(':animated') || $('.youtube_cinema_overlay', youtube_cinema).is(':animated')) { return false; }
-			if (options.effect == 'none') {
+			if (options.effect === 'none') {
 				$('.youtube_cinema_overlay', youtube_cinema).hide();
 				$('.youtube_cinema_box', youtube_cinema).hide();
 				$('.youtube_cinema_caption', youtube_cinema).hide();
 				$('iframe', youtube_cinema).attr('src', '');
-			} else if (options.effect == 'fade') {
+			} else if (options.effect === 'fade') {
 				$('.youtube_cinema_box', youtube_cinema).fadeOut((options.speed/2), function() {
 					$('.youtube_cinema_overlay', youtube_cinema).fadeOut(options.speed/2);
 					$('.youtube_cinema_caption', youtube_cinema).hide();
